@@ -9,8 +9,8 @@ Step-by-step tutorial: https://medium.com/@rodkey/deploying-a-flask-application-
 
 from flask import Flask, render_template, request, redirect, url_for
 from application import db
-from application.models import Data
-from application.forms import EnterDBInfo, RetrieveDBInfo
+from application.models import drinkers, bars
+from application.forms import stateSelection
 
 # Elastic Beanstalk initalization
 application = Flask(__name__)
@@ -21,8 +21,7 @@ application.secret_key = 'my336DbProject'
 @application.route('/', methods=['GET', 'POST'])
 @application.route('/index', methods=['GET', 'POST'])
 def index():
-    form1 = EnterDBInfo(request.form)
-    form2 = RetrieveDBInfo(request.form)
+    state_selection = stateSelection(request.form)
 
     # if request.method == 'POST' and form1.validate():
     #     data_entered = Data(notes=form1.dbNotes.data)
@@ -34,13 +33,11 @@ def index():
     #         db.session.rollback()
     #     return render_template('thanks.html', notes=form1.dbNotes.data)
 
-    if request.method == 'POST' and form2.validate():
-            num_return = int(form2.numRetrieve.data)
+    if request.method == 'POST' and state_selection.validate():
+            num_return = int(state_selection.data)
             query_db = Data.query.order_by(Data.id.desc()).limit(num_return)
             for q in query_db:
                 print(q.notes)
-            db.session.close()
-            db.session.rollback()
         return render_template('results.html', results=query_db, num_return=num_return)
 
     return render_template('index.html', form1=form1, form2=form2)
