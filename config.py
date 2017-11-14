@@ -2,4 +2,4 @@ SQLALCHEMY_DATABASE_URI = 'mysql://my336Db:zohaibdatabase@my336instance.cffs7lx8
 SQLALCHEMY_POOL_RECYCLE = 3600
 
 WTF_CSRF_ENABLED = True
-SECRET_KEY = 'dsaf0897sfdg45sfdgfdsaqzdf98sdf0a'
+SECRET_KEY = 'my336DbProjectDatabase'
