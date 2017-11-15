@@ -1,5 +1,5 @@
-from flask_wtf import Form
-from wtforms import TextField, validators
+from flask_wtf import FlaskForm
+from wtforms import TextField, validators, SelectField
 
 STATE_CHOICES = [('AL', 'Alabama'),('AK','Alaska'),('AZ', 'Arizona'),('AR','Arkansas'),('CA','California'),('CO','Colorado'),
                 ('CT','Connecticut'),('DE','Delaware'),('FL','Florida'),('GA','Georgia'),('HI','Hawaii'),('ID','Idaho'),
@@ -11,5 +11,5 @@ STATE_CHOICES = [('AL', 'Alabama'),('AK','Alaska'),('AZ', 'Arizona'),('AR','Arka
                 ('UT','Utah'),('VT','Vermont'),('VA','Virginia'),('WA','Washington'),('WV', 'West Virginia'),('WI','Wisconsin'),('WY','Wyoming'),
                 ('DC','District of Columbia'),('PR','Puerto Rico')]
 
-class stateSelection(wtforms.Form):
-    state = wtforms.SelectField(label='State', choices=STATE_CHOICES)
+class stateSelection(FlaskForm):
+    state = SelectField(label = 'State', choices = STATE_CHOICES)
