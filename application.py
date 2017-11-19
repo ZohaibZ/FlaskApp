@@ -11,15 +11,21 @@ application.secret_key = 'my336DbProject'
 def index():
     engine = create_engine('mysql+pymysql://my336Db:zohaibdatabase@my336instance.cffs7lx8bqq2.us-east-1.rds.amazonaws.com:3306/BarBeerDrinkerPlus', convert_unicode=True)
     connection = engine.connect()
-
     state_select = stateSelection(request.form)
     media_select = mediaSelection(request.form)
 
-    if request.method == 'POST' and state_select.validate_on_submit():
+    if request.method == 'POST' and state_select.validate():
         target_state = state_select.state.data
         bar_tuples=connection.execute("select * from bars where state='"+target_state+"'" ).fetchall()
         drinker_tuples=connection.execute("select * from drinkers where state='"+target_state+"'" ).fetchall()
         return render_template('results.html', results1 = bar_tuples, results2 = drinker_tuples)
+
+    if request.method == 'POST' and media_select.validate():
+        target_drinker = media_select.drinker.data
+        target_media = media_select.media.data
+        friend_tuples=connection.execute("select * from friends,drinkers where drinker_id='"+target_drinker+"'and socialmedia_id='"+target_media+"'").fetchall()
+        bar_tuples = ""
+        return render_template('results.html', results1 = bar_tuples, results2 = friends_tuples)
 
     return render_template('index.html', form1 = state_select, form2 = media_select)
 
