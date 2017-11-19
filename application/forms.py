@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import TextField, validators, SelectField, SubmitField
+from application.models import drinkers, bars
+from wtforms import TextField, validators, SelectField, SubmitField, SelectMultipleField
 
 STATE_CHOICES = [('AL', 'Alabama'),('AK','Alaska'),('AZ', 'Arizona'),('AR','Arkansas'),('CA','California'),('CO','Colorado'),
                 ('CT','Connecticut'),('DE','Delaware'),('FL','Florida'),('GA','Georgia'),('HI','Hawaii'),('ID','Idaho'),
@@ -11,6 +12,13 @@ STATE_CHOICES = [('AL', 'Alabama'),('AK','Alaska'),('AZ', 'Arizona'),('AR','Arka
                 ('UT','Utah'),('VT','Vermont'),('VA','Virginia'),('WA','Washington'),('WV', 'West Virginia'),('WI','Wisconsin'),('WY','Wyoming'),
                 ('DC','District of Columbia'),('PR','Puerto Rico')]
 
+DRINKER_CHOICES = [(a.id, a.name) for a in drinkers.query.all()]
+
 class stateSelection(FlaskForm):
     state = SelectField(label = 'State', choices = STATE_CHOICES)
-    submit = SubmitField("Submit")
+
+class mediaSelection(FlaskForm):
+    drinker = SelectField(label = 'Drinker', choices = DRINKER_CHOICES)
+
+class drinkerSelection(FlaskForm):
+    state = SelectField()

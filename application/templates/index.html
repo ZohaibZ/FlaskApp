@@ -6,20 +6,24 @@
     <h1>BarBeerDrinkerPlus</h1>
   </div>
 
-  <hr>
+  <div align="center">
+    <hr>
+    <p> Select a target state </p>
+    <form1 action="/index" method="POST" name="state_select">
+      {{form1.hidden_tag()}} {{form1.state.label}} {{form1.state}}
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form1>
 
-  <form action="/index" method="POST" name="stateSelection">
-    {{form.hidden_tag()}}
-    <p>
-      {{form.state.label}}
-      {{form.state}}
-      {{form.submit()}}
-    </p>
-  </form>
+    <hr>
+    <form2 action="/index" method="POST" name="media_select">
+      {{form2.hidden_tag()}} {{form2.drinker.label}} {{form2.drinker}}
+      <input type="radio" name="name" value="facebook" checked> facebook
+      <input type="radio" name="name" value="twitter"> twitter
+      <input type="radio" name="name" value="instagram"> instgram
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form2>
+    <hr>
 
-  <hr>
+  </div>
 
-
-</div>
-
-{% endblock %}
+  {% endblock %}
