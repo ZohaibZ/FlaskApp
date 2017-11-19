@@ -10,11 +10,14 @@
     <hr>
     <p> Select a target state </p>
     <form1 action="/index" method="POST" name="stateSelection">
-      {{form1.hidden_tag()}} {{form1.state.label}} {{form1.state}}{{form1.submit_state}}
+      {{form1.hidden_tag()}} {{form1.state.label}} {{form1.state}}
+      {{form1.submit_state}}
     </form1>
     <hr>
     <form2 action="/index" method="POST" name="mediaSelection">
-      {{form2.hidden_tag()}} {{form2.drinker.label}} {{form2.drinker}} {{form2.media.label}} {{form2.media}} {{form2.submit_media}}
+      {{form2.hidden_tag()}} {{form2.drinker.label}} {{form2.drinker}}
+      {{form2.hidden_tag()}} {{form2.media.label}} {{form2.media}}
+      {{form2.submit_media}}
     </form2>
     <hr>
 
