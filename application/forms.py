@@ -21,7 +21,7 @@ class stateSelection(FlaskForm):
     submit = SubmitField("Submit")
 
 def drinker_query():
-    return db.session.query(drinkers)
+    return drinkers.query.order_by(drinkers.name)
 
 class mediaSelection(FlaskForm):
     drinker = QuerySelectField(query_factory=drinker_query ,allow_blank=False)

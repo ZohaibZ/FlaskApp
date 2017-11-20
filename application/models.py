@@ -54,9 +54,9 @@ class bartenders(db.Model):
 class bartends(db.Model):
     bartender_id = db.Column(db.Integer, db.ForeignKey('bartenders.id'), primary_key=True)
     bar_id = db.Column(db.Integer, db.ForeignKey('bars.id'), primary_key=True)
-    month = db.Column(db.Integer)
-    day = db.Column(db.Integer)
-    shift = db.Column(db.Integer)
+    month = db.Column(db.Integer, primary_key=True)
+    day = db.Column(db.Integer, primary_key=True)
+    shift = db.Column(db.Integer, primary_key=True)
     tips = db.Column(db.Integer)
 
 class frequents(db.Model):
@@ -69,10 +69,10 @@ class occupations(db.Model):
 
 class sells(db.Model):
     bar_id = db.Column(db.Integer, db.ForeignKey('bars.id'), primary_key=True)
-    beer_id = db.Column(db.Integer, db.ForeignKey('beers.id'))
-    month = db.Column(db.Integer)
-    day = db.Column(db.Integer)
-    time = db.Column(db.Integer)
+    beer_id = db.Column(db.Integer, db.ForeignKey('beers.id'), primary_key=True)
+    month = db.Column(db.Integer, primary_key=True)
+    day = db.Column(db.Integer, primary_key=True)
+    time = db.Column(db.Integer, primary_key=True)
     price = db.Column(db.Float)
     qty = db.Column(db.Integer)
 
@@ -82,17 +82,17 @@ class socialmedia(db.Model):
 
 class works(db.Model):
     drinker_id = db.Column(db.Integer, db.ForeignKey('drinkers.id'), primary_key=True)
-    occupation_id = db.Column(db.Integer, db.ForeignKey('occupations.id'))
+    occupation_id = db.Column(db.Integer, db.ForeignKey('occupations.id'), primary_key=True)
     salary = db.Column(db.Integer)
 
 class friends(db.Model):
     drinker_id = db.Column(db.Integer, db.ForeignKey('drinkers.id'), primary_key=True)
-    friend_id = db.Column(db.Integer, db.ForeignKey('drinkers.id'))
-    socialmedia_id = db.Column(db.Integer, db.ForeignKey('socialmedia.id'))
+    friend_id = db.Column(db.Integer, db.ForeignKey('drinkers.id'), primary_key=True)
+    socialmedia_id = db.Column(db.Integer, db.ForeignKey('socialmedia.id'), primary_key=True)
 
 class pays(db.Model):
     bar_id = db.Column(db.Integer, db.ForeignKey('bars.id'), primary_key=True)
-    beer_id = db.Column(db.Integer, db.ForeignKey('beers.id'))
-    month = db.Column(db.Integer)
+    beer_id = db.Column(db.Integer, db.ForeignKey('beers.id'), primary_key=True)
+    month = db.Column(db.Integer, primary_key=True)
     qty = db.Column(db.Integer)
     price = db.Column(db.Float)

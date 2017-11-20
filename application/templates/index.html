@@ -9,14 +9,14 @@
   <div align="center">
     <hr>
 
-    <p> Select a target state </p>
+    <p> Select a target state to find bars and drinkers there </p>
     <form action="/index" method="POST" name="stateSelection">
       {{form1.hidden_tag()}}  {{form1.state.label}} {{form1.state}}
       {{form1.submit()}}
     </form>
     <hr>
 
-    <p> Select a target state </p>
+    <p> Select a name and social media to find a list of his friends and what bars they frequent </p>
     <form action="/index" method="POST" name="stateSelection">
       {{ form2.hidden_tag() }}
       {{ form2.drinker.label }} {{ form2.drinker }}
