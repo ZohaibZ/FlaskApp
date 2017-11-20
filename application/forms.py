@@ -16,12 +16,9 @@ DRINKER_CHOICES = [(a.id, a.name) for a in drinkers.query.all()]
 
 class stateSelection(FlaskForm):
     state = SelectField(label = 'State', choices = STATE_CHOICES)
-    submit_state = SubmitField('Submit')
-    
+    submit = SubmitField("Submit")
+
 class mediaSelection(FlaskForm):
     drinker = SelectField(label = 'Drinker', choices = DRINKER_CHOICES)
     media = SelectField(label = 'media', choices = [('1', 'facebook'),('2','twitter'),('3','instagram')])
-    submit_media = SubmitField('Submit')
-
-class drinkerSelection(FlaskForm):
-    state = SelectField()
+    submit = SubmitField("Submit")
