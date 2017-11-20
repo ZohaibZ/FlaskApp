@@ -1,6 +1,8 @@
 from flask_wtf import FlaskForm
-from application.models import drinkers, bars
-from wtforms import TextField, validators, SelectField, SubmitField, SelectMultipleField
+from application.models import *
+from wtforms import TextField, validators, SelectField, SubmitField, SelectMultipleField, fields
+from wtforms.validators import DataRequired
+from wtforms_sqlalchemy.fields import QuerySelectField
 
 STATE_CHOICES = [('AL', 'Alabama'),('AK','Alaska'),('AZ', 'Arizona'),('AR','Arkansas'),('CA','California'),('CO','Colorado'),
                 ('CT','Connecticut'),('DE','Delaware'),('FL','Florida'),('GA','Georgia'),('HI','Hawaii'),('ID','Idaho'),
@@ -12,13 +14,16 @@ STATE_CHOICES = [('AL', 'Alabama'),('AK','Alaska'),('AZ', 'Arizona'),('AR','Arka
                 ('UT','Utah'),('VT','Vermont'),('VA','Virginia'),('WA','Washington'),('WV', 'West Virginia'),('WI','Wisconsin'),('WY','Wyoming'),
                 ('DC','District of Columbia'),('PR','Puerto Rico')]
 
-DRINKER_CHOICES = [(a.id, a.name) for a in drinkers.query.all()]
+MEDIA_CHOICES = [('1','facebook'),('2','twitter'),('3','instagram')]
 
 class stateSelection(FlaskForm):
     state = SelectField(label = 'State', choices = STATE_CHOICES)
     submit = SubmitField("Submit")
 
+def drinker_query():
+    return db.session.query(drinkers)
+
 class mediaSelection(FlaskForm):
-    drinker = SelectField(label = 'Drinker', choices = DRINKER_CHOICES)
-    media = SelectField(label = 'media', choices = [('1', 'facebook'),('2','twitter'),('3','instagram')])
+    drinker = QuerySelectField(query_factory=drinker_query ,allow_blank=False)
+    media = SelectField(label = 'Media', choices = MEDIA_CHOICES)
     submit = SubmitField("Submit")

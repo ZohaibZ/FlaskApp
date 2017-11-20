@@ -8,7 +8,7 @@
 
   <div align="center">
     <hr>
-    
+
     <p> Select a target state </p>
     <form action="/index" method="POST" name="stateSelection">
       {{form1.hidden_tag()}}  {{form1.state.label}} {{form1.state}}
@@ -16,10 +16,12 @@
     </form>
     <hr>
 
-    <form action="/index" method="POST" name="mediaSelection">
-      {{form2.hidden_tag()}} {{form2.drinker.label}} {{form2.drinker}}
-      {{form2.hidden_tag()}} {{form2.media.label}} {{form2.media}}
-      {{form2.submit()}}
+    <p> Select a target state </p>
+    <form action="/index" method="POST" name="stateSelection">
+      {{ form2.hidden_tag() }}
+      {{ form2.drinker.label }} {{ form2.drinker }}
+      {{ form2.media.label }} {{ form2.media }}
+      {{ form2.submit() }}
     </form>
     <hr>
 
