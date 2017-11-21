@@ -17,6 +17,8 @@ def index():
     monthly_sale = monthlySales(request.form)
     daily_avgs = dailyAvgs(request.form)
     user_likes = userLikes(request.form)
+    time_ofday = timeOfDay(request.form)
+    bartender_avg = bartenderAvg(request.form)
 
     if request.method == 'POST' and state_select.validate_on_submit():
         print "state here"
@@ -57,7 +59,23 @@ def index():
         beer_tuples=connection.execute("select distinct s.bar_id as bar_id, b1.name as bar_name, s.beer_id as beer_id, b.name as beer_name from bars b1 join sells s on s.bar_id=b1.id join beers b on b.id = s.beer_id where bar_id ="+str(target_bar.id)+" and month ="+target_month).fetchall()
         return render_template('results4.html', results1 = bar_tuples, results2 = beer_tuples)
 
-    return render_template('index.html', form1 = state_select, form2 = media_select, form3 = monthly_sale, form4 = daily_avgs, form5= user_likes)
+    if request.method == 'POST' and time_ofday.validate_on_submit():
+        print "time here"
+        target_month = time_ofday.month2.data
+        target_state = time_ofday.state2.data
+        bar_tuples1=connection.execute("select s.bar_id, s.month, s.time, avg(s.qty) as avgq from sells s join bars b on s.bar_id = b.id where s.month ="+target_month+" and b.state='"+target_state+"' group by bar_id, time" ).fetchall()
+        bar_tuples2=connection.execute("select distinct b.* from sells s join bars b on s.bar_id = b.id where s.month = "+target_month+" and b.state='"+target_state+"' group by bar_id").fetchall()
+        return render_template('results6.html', results1 = bar_tuples1, results2 = bar_tuples2)
+
+    if request.method == 'POST' and bartender_avg.validate_on_submit():
+        print "bartender here"
+        target_month = bartender_avg.month3.data
+        target_state = bartender_avg.state3.data
+        bar_tuples1=connection.execute("select avg(b2.age) as avgAge , b2.gender, b1.shift, avg(b1.tips) as avgTip from bartends b1 join bartenders b2 on b1.bartender_id = b2.id join bars b on b.id = b1.bar_id where b.state='"+target_state+"' and month ="+target_month+" group by b1.shift, b2.gender" ).fetchall()
+        return render_template('results7.html', results1 = bar_tuples1)
+
+
+    return render_template('index.html', form1 = state_select, form2 = media_select, form3 = monthly_sale, form4 = daily_avgs, form5= user_likes, form6=time_ofday, form7=bartender_avg)
 
 if __name__ == '__main__':
     application.run(debug = True)
