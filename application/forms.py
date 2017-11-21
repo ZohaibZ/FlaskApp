@@ -47,3 +47,5 @@ class userLikes(FlaskForm):
     drinker1 = QuerySelectField(label='Drinker', query_factory=drinker_query ,allow_blank=False)
     state1 = SelectField(label = 'State', choices = STATE_CHOICES)
     submit = SubmitField("Submit")
+
+class timeOfDay(FlaskForm):
