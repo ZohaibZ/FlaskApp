@@ -12,9 +12,9 @@ def index():
     engine = create_engine('mysql+pymysql://my336Db:zohaibdatabase@my336instance.cffs7lx8bqq2.us-east-1.rds.amazonaws.com:3306/BarBeerDrinkerPlus', convert_unicode=True)
     connection = engine.connect()
 
-    state_select = stateSelection(request.form)
-    media_select = mediaSelection(request.form)
-    monthly_sale = monthlySales(request.form)
+    state_select = stateSelection()
+    media_select = mediaSelection()
+    monthly_sale = monthlySales()
 
     if request.method == 'POST' and state_select.validate_on_submit():
         print "state here"
@@ -32,12 +32,15 @@ def index():
         return render_template('results2.html', results1 = bar_tuples, results2 = drinker_tuples)
 
     if request.method == 'POST' and monthly_sale.validate_on_submit():
-        print "monthly here"
+        print "monthly/daily here"
         target_bar = monthly_sale.bar.data
         target_month = monthly_sale.month.data
-        bar_tuples=connection.execute("select bar_id, beer_id, month, sum(qty) as sumq from sells where bar_id ="+str(target_bar.id)+" and month ="+target_month+" group by bar_id, beer_id, month").fetchall()
+        bar_tuples2=connection.execute("select subq.bar_id, subq.beer_id, subq.month, avg(subq.sumq) as avgSoldPerDay from (select bar_id, beer_id, month, day, sum(qty) as sumq from sells where bar_id  ="+str(target_bar.id)+" and month ="+target_month+" group by bar_id, beer_id, month, day)subq group by month, beer_id, bar_id").fetchall()
+        bar_tuples1=connection.execute("select bar_id, beer_id, month, sum(qty) as sumq from sells where bar_id ="+str(target_bar.id)+" and month ="+target_month+" group by bar_id, beer_id, month").fetchall()
         beer_tuples=connection.execute("select distinct s.bar_id as bar_id, b1.name as bar_name, s.beer_id as beer_id, b.name as beer_name from bars b1 join sells s on s.bar_id=b1.id join beers b on b.id = s.beer_id where bar_id ="+str(target_bar.id)+" and month ="+target_month).fetchall()
-        return render_template('results3.html', results1 = bar_tuples, results2 = beer_tuples)
+        return render_template('results3.html', results1 = bar_tuples1, results2 = bar_tuples2, results3 = beer_tuples)
+
+
 
     return render_template('index.html', form1 = state_select, form2 = media_select, form3 = monthly_sale)
 
