@@ -16,14 +16,24 @@ STATE_CHOICES = [('AL', 'Alabama'),('AK','Alaska'),('AZ', 'Arizona'),('AR','Arka
 
 MEDIA_CHOICES = [('1','facebook'),('2','twitter'),('3','instagram')]
 
-class stateSelection(FlaskForm):
-    state = SelectField(label = 'State', choices = STATE_CHOICES)
-    submit = SubmitField("Submit")
+MONTH_CHOICES = [('9','September'),('10','October'),('11', 'November')]
 
 def drinker_query():
     return drinkers.query.order_by(drinkers.name)
 
+def bar_query():
+    return bars.query.order_by(bars.name)
+
+class stateSelection(FlaskForm):
+    state = SelectField(label = 'State', choices = STATE_CHOICES)
+    submit = SubmitField("Submit")
+
 class mediaSelection(FlaskForm):
     drinker = QuerySelectField(query_factory=drinker_query ,allow_blank=False)
     media = SelectField(label = 'Media', choices = MEDIA_CHOICES)
+    submit = SubmitField("Submit")
+
+class monthlySales(FlaskForm):
+    bar = QuerySelectField(query_factory=bar_query, allow_blank=False)
+    month = SelectField(label = 'Month', choices = MONTH_CHOICES)
     submit = SubmitField("Submit")

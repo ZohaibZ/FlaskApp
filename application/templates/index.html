@@ -11,7 +11,7 @@
     <h4>General queries</h4>
     <hr>
 
-    <p> Select a target state to find bars and drinkers there </p>
+    <p>Select a target state to find bars and drinkers there</p>
     <form action="/index" method="POST" name="stateSelection">
       {{ form1.hidden_tag() }} {{ form1.state.label }} {{ form1.state }} {{ form1.submit() }}
     </form>
@@ -20,7 +20,7 @@
     <h4>Queries for Drinkers</h4>
     <hr>
 
-    <p> Select a name and social media to find a list of his friends and what bars they frequent </p>
+    <p>Select a name and social media to find a list of his friends and what bars they frequent</p>
     <form action="/index" method="POST" name="mediaSelection">
       {{ form2.hidden_tag() }} {{ form2.drinker.label }} {{ form2.drinker }} {{ form2.media.label }} {{ form2.media }} {{ form2.submit() }}
     </form>
@@ -28,6 +28,11 @@
     <hr>
     <h4>Queries for Bar Owners</h4>
     <hr>
+
+    <p>Select a bar and a month to find its monthly sale for each beer in that month</p>
+    <form action="/index" method="POST" name="monthlySales">
+      {{ form3.hidden_tag() }} {{ form3.bar.label }} {{ form3.bar }} {{ form3.month.label }} {{ form3.month}} {{ form3.submit() }}
+    </form>
 
     <hr>
     <h4>Queries to verify trends</h4>

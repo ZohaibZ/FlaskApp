@@ -14,7 +14,7 @@ class bars(db.Model):
     phone = db.Column(db.String(30))
 
     def __repr__(self):
-        return "Bar '{}'".format(self.name)
+        return "{}".format(self.name)
 
 class drinkers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
