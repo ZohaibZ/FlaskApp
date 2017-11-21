@@ -8,7 +8,7 @@
   <div align="center">
 
     <hr>
-    <h4>General queries</h4>
+    <h3>General queries</h3>
     <hr>
 
     <p>Select a target state to find bars and drinkers there</p>
@@ -17,7 +17,14 @@
     </form>
 
     <hr>
-    <h4>Queries for Drinkers</h4>
+    <h3>Queries for Drinkers</h3>
+    <hr>
+
+    <p>Select a target drinker and state to find bars that serve beers the drinker likes</p>
+    <form action="/index" method="POST" name="userLikes">
+      {{ form5.hidden_tag() }} {{ form5.drinker1.label }} {{ form5.drinker1 }} {{ form5.state1.label }} {{ form5.state1 }} {{ form5.submit() }}
+    </form>
+
     <hr>
 
     <p>Select a name and social media to find a list of his friends and what bars they frequent</p>
@@ -26,18 +33,24 @@
     </form>
 
     <hr>
-    <h4>Queries for Bar Owners</h4>
+    <h3>Queries for Bar Owners</h3>
     <hr>
 
     <p>Select a bar and a month to find its monthly sale for each beer in that month</p>
     <form action="/index" method="POST" name="monthlySales">
       {{ form3.hidden_tag() }} {{ form3.bar.label }} {{ form3.bar }} {{ form3.month.label }} {{ form3.month}} {{ form3.submit() }}
     </form>
+    <hr>
+    <p>Select a bar and a month to find its avg sold per day for each beer in that month</p>
+    <form action="/index" method="POST" name="monthlySales">
+      {{ form4.hidden_tag() }} {{ form4.bar1.label }} {{ form4.bar1 }} {{ form4.month1.label }} {{ form4.month1}} {{ form4.submit() }}
+    </form>
 
     <hr>
-    <h4>Queries to verify trends</h4>
+    <h3>Queries to verify trends</h3>
     <hr>
 
   </div>
+</div>
 
   {% endblock %}

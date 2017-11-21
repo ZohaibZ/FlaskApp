@@ -46,22 +46,36 @@
   <div id="table-wrapper">
     <div id="table-scroll">
       <table class="table table-striped table-hover">
-        <caption>This is the total sold for each beer at this bar</caption>
+        <caption>These are all the bars in the state</caption>
         <thead>
           <tr>
             <td>bar_id</td>
-            <td>beer_id</td>
-            <td>month</td>
-            <td>total sold</td>
+            <td>name</td>
+            <td>reviews</td>
+            <td>price</td>
+            <td>stars</td>
+            <td>occupany</td>
+            <td>type</td>
+            <td>address</td>
+            <td>city</td>
+            <td>state</td>
+            <td>phone</td>
           </tr>
         </thead>
         <tbody>
           {% for z in results1 %}
           <tr>
-            <td>{{ z.bar_id }}</td>
-            <td>{{ z.beer_id }}</td>
-            <td>{{ z.month }}</td>
-            <td>{{ z.sumq }}</td>
+            <td>{{ z.id }}</td>
+            <td>{{ z.name }}</td>
+            <td>{{ z.reviews }}</td>
+            <td>{{ z.price }}</td>
+            <td>{{ z.stars }}</td>
+            <td>{{ z.occupancy }}</td>
+            <td>{{ z.type }}</td>
+            <td>{{ z.address }}</td>
+            <td>{{ z.city }}</td>
+            <td>{{ z.state }}</td>
+            <td>{{ z.phone }}</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -72,11 +86,10 @@
   <div id="table-wrapper">
     <div id="table-scroll">
       <table class="table table-striped table-hover">
-        <caption>These are the beers they correspond to</caption>
+        <caption>These are the drinkers in the state</caption>
         <thead>
           <tr>
-            <td>bar_id</td>
-            <td>bar_name</td>
+            <td>drinker_id</td>
             <td>beer_id</td>
             <td>beer_name</td>
           </tr>
@@ -84,10 +97,9 @@
         <tbody>
           {% for z in results2 %}
           <tr>
-            <td>{{ z.bar_id}}</td>
-            <td>{{ z.bar_name }}</td>
-            <td>{{ z.beer_id }}</td>
-            <td>{{ z.beer_name }}</td>
+            <td>{{ z.drinker_id }}</td>
+            <td>{{ z.id }}</td>
+            <td>{{ z.name }}</td>
           </tr>
           {% endfor %}
         </tbody>

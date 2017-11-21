@@ -29,11 +29,21 @@ class stateSelection(FlaskForm):
     submit = SubmitField("Submit")
 
 class mediaSelection(FlaskForm):
-    drinker = QuerySelectField(query_factory=drinker_query ,allow_blank=False)
+    drinker = QuerySelectField(label='Drinker', query_factory=drinker_query ,allow_blank=False)
     media = SelectField(label = 'Media', choices = MEDIA_CHOICES)
     submit = SubmitField("Submit")
 
 class monthlySales(FlaskForm):
-    bar = QuerySelectField(query_factory=bar_query, allow_blank=False)
+    bar = QuerySelectField(label='Bar', query_factory=bar_query, allow_blank=False)
     month = SelectField(label = 'Month', choices = MONTH_CHOICES)
+    submit = SubmitField("Submit")
+
+class dailyAvgs(FlaskForm):
+    bar1 = QuerySelectField(label = 'Bar', query_factory=bar_query, allow_blank=False)
+    month1 = SelectField(label = 'Month', choices = MONTH_CHOICES)
+    submit = SubmitField("Submit")
+
+class userLikes(FlaskForm):
+    drinker1 = QuerySelectField(label='Drinker', query_factory=drinker_query ,allow_blank=False)
+    state1 = SelectField(label = 'State', choices = STATE_CHOICES)
     submit = SubmitField("Submit")
