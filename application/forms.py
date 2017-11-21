@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from application.models import *
 from wtforms import TextField, validators, SelectField, SubmitField, SelectMultipleField, fields
 from wtforms.validators import DataRequired
-from wtforms_sqlalchemy.fields import QuerySelectField
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
 STATE_CHOICES = [('AL', 'Alabama'),('AK','Alaska'),('AZ', 'Arizona'),('AR','Arkansas'),('CA','California'),('CO','Colorado'),
                 ('CT','Connecticut'),('DE','Delaware'),('FL','Florida'),('GA','Georgia'),('HI','Hawaii'),('ID','Idaho'),
