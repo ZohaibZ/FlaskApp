@@ -62,3 +62,8 @@ class typeOfBar(FlaskForm):
     state4 = SelectField(label = 'State', choices = STATE_CHOICES)
     month4 = SelectField(label = 'Month', choices = MONTH_CHOICES)
     submit = SubmitField("Submit")
+
+class whoVisits(FlaskForm):
+    state5 = SelectField(label = 'State', choices = STATE_CHOICES)
+    month5 = SelectField(label = 'Month', choices = MONTH_CHOICES)
+    submit = SubmitField("Submit")

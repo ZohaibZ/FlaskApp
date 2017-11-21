@@ -65,6 +65,10 @@
     <hr>
     <h3>Queries to verify other trends</h3>
     <hr>
+    <p>Select a state and month to find what type of bar in that state sells the most beer</p>
+    <form action="/index" method="POST" name="monthlySales">
+      {{ form9.hidden_tag() }} {{ form9.state5.label }} {{ form9.state5 }} {{ form9.month5.label }} {{ form9.month5 }} {{ form9.submit() }}
+    </form>
 
   </div>
 </div>

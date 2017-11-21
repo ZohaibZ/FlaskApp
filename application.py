@@ -19,7 +19,8 @@ def index():
     user_likes = userLikes(request.form)
     time_ofday = timeOfDay(request.form)
     bartender_avg = bartenderAvg(request.form)
-    type_ofbar=typeOfBar(request.form)
+    type_ofbar = typeOfBar(request.form)
+    who_visits = whoVisits(request.form)
 
     if request.method == 'POST' and state_select.validate_on_submit():
         print "state here"
@@ -82,8 +83,15 @@ def index():
         bar_tuples1=connection.execute("select b.type, s.month, sum(s.qty) as sumq from sells s join bars b on s.bar_id = b.id where s.month ="+target_month+" and b.state='"+target_state+"' group by b.type" ).fetchall()
         return render_template('results8.html', results1 = bar_tuples1)
 
+    if request.method == 'POST' and who_visits.validate_on_submit():
+        print "visits here"
+        target_state = who_visits.state5.data
+        target_month = who_visits.month5.data
+        visit_tuples1=connection.execute("select v.drinker_id, v.month, sum(v.qty) as sumq from visits v join drinkers d on v.drinker_id=d.id where d.state ='"+target_state+"' and v.month ="+target_month+" group by v.drinker_id order by sumq desc").fetchall()
+        visit_tuples2=connection.execute("select v.drinker_id, d.name, w.salary from visits v join drinkers d on v.drinker_id=d.id join works w on v.drinker_id=w.drinker_id where d.state='"+target_state+"' and v.month ="+target_month+"  group by v.drinker_id order by w.salary asc").fetchall()
+        return render_template('results9.html', results1 = visit_tuples1, results2 = visit_tuples2)
 
-    return render_template('index.html', form1 = state_select, form2 = media_select, form3 = monthly_sale, form4 = daily_avgs, form5= user_likes, form6=time_ofday, form7=bartender_avg, form8=type_ofbar)
+    return render_template('index.html', form1 = state_select, form2 = media_select, form3 = monthly_sale, form4 = daily_avgs, form5= user_likes, form6=time_ofday, form7=bartender_avg, form8=type_ofbar, form9 = who_visits)
 
 if __name__ == '__main__':
     application.run(debug = True)

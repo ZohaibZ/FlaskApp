@@ -101,8 +101,7 @@ class visits(db.Model):
     drinker_id = db.Column(db.Integer, db.ForeignKey('drinkers.id'), primary_key=True)
     bar_id = db.Column(db.Integer, db.ForeignKey('bars.id'), primary_key=True)
     month = db.Column(db.Integer, primary_key=True)
-    day = db.Column(db.Integer, primary_key=True)
-    time = db.Column(db.Integer, primary_key=True)
+    qty = db.Column(db.Integer,primary_key=True)
 
 class likes(db.Model):
     beer_id = db.Column(db.Integer, db.ForeignKey('beers.id'), primary_key=True)
