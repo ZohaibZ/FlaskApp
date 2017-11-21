@@ -49,3 +49,6 @@ class userLikes(FlaskForm):
     submit = SubmitField("Submit")
 
 class timeOfDay(FlaskForm):
+    bar2 = QuerySelectField(label = 'Bar', query_factory=bar_query, allow_blank=False)
+    month2 = SelectField(label = 'Month', choices = MONTH_CHOICES)
+    submit = SubmitField("Submit")
