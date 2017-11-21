@@ -56,6 +56,11 @@
     <form action="/index" method="POST" name="monthlySales">
       {{ form6.hidden_tag() }} {{ form6.state2.label }} {{ form6.state2 }} {{ form6.month2.label }} {{ form6.month2}} {{ form6.submit() }}
     </form>
+    <hr>
+    <p>Select a state and month to find what type of bar in that state sells the most beer</p>
+    <form action="/index" method="POST" name="monthlySales">
+      {{ form8.hidden_tag() }} {{ form8.state4.label }} {{ form8.state4 }} {{ form8.month4.label }} {{ form8.month4}} {{ form8.submit() }}
+    </form>
 
     <hr>
     <h3>Queries to verify other trends</h3>

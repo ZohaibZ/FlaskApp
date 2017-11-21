@@ -57,3 +57,8 @@ class bartenderAvg(FlaskForm):
     state3 = SelectField(label = 'State', choices = STATE_CHOICES)
     month3 = SelectField(label = 'Month', choices = MONTH_CHOICES)
     submit = SubmitField("Submit")
+
+class typeOfBar(FlaskForm):
+    state4 = SelectField(label = 'State', choices = STATE_CHOICES)
+    month4 = SelectField(label = 'Month', choices = MONTH_CHOICES)
+    submit = SubmitField("Submit")

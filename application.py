@@ -19,6 +19,7 @@ def index():
     user_likes = userLikes(request.form)
     time_ofday = timeOfDay(request.form)
     bartender_avg = bartenderAvg(request.form)
+    type_ofbar=typeOfBar(request.form)
 
     if request.method == 'POST' and state_select.validate_on_submit():
         print "state here"
@@ -74,8 +75,15 @@ def index():
         bar_tuples1=connection.execute("select avg(b2.age) as avgAge , b2.gender, b1.shift, avg(b1.tips) as avgTip from bartends b1 join bartenders b2 on b1.bartender_id = b2.id join bars b on b.id = b1.bar_id where b.state='"+target_state+"' and month ="+target_month+" group by b1.shift, b2.gender" ).fetchall()
         return render_template('results7.html', results1 = bar_tuples1)
 
+    if request.method == 'POST' and type_ofbar.validate_on_submit():
+        print "bartender here"
+        target_month = type_ofbar.month4.data
+        target_state = type_ofbar.state4.data
+        bar_tuples1=connection.execute("select b.type, s.month, sum(s.qty) as sumq from sells s join bars b on s.bar_id = b.id where s.month ="+target_month+" and b.state='"+target_state+"' group by b.type" ).fetchall()
+        return render_template('results8.html', results1 = bar_tuples1)
 
-    return render_template('index.html', form1 = state_select, form2 = media_select, form3 = monthly_sale, form4 = daily_avgs, form5= user_likes, form6=time_ofday, form7=bartender_avg)
+
+    return render_template('index.html', form1 = state_select, form2 = media_select, form3 = monthly_sale, form4 = daily_avgs, form5= user_likes, form6=time_ofday, form7=bartender_avg, form8=type_ofbar)
 
 if __name__ == '__main__':
     application.run(debug = True)
