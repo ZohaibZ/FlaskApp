@@ -60,4 +60,4 @@ def index():
     return render_template('index.html', form1 = state_select, form2 = media_select, form3 = monthly_sale, form4 = daily_avgs, form5= user_likes)
 
 if __name__ == '__main__':
-    application.run(debug = True)
+    application.run(host='0.0.0.0')
