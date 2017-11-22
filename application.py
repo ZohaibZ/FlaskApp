@@ -31,9 +31,9 @@ def index():
 
     if request.method == 'POST' and user_likes.validate_on_submit():
         print "user here"
-        target_drinker = user_likes.drinker1.data
+        target_drinker = user_likes.drinker1.dataok
         target_state = user_likes.state1.data
-        bar_tuples=connection.execute("select distinct b.* from likes l join sells s on l.beer_id = s.beer_id join bars b on b.id = s.bar_id where l.drinker_id ="+str(target_drinker.id)+" and b.state='"+target_state+"'" ).fetchall()
+        bar_tuples=connection.execute("select distinct b.* from likes l join sells s on l.beer_id = s.beer_id join bars b on b.id = s.bar_id where l.drinker_id ="+str(target_drinker.id)+" and b.state='"+target_state+"' order by stars desc").fetchall()
         beer_tuples=connection.execute("select distinct l.drinker_id, b.id, b.name from likes l join beers b on l.beer_id = b.id where l.drinker_id ="+str(target_drinker.id)).fetchall()
         return render_template('results5.html', results1 = bar_tuples,results2 = beer_tuples)
 

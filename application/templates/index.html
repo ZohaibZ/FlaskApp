@@ -1,78 +1,85 @@
 {% extends "base.html" %} {% import 'macros.html' as macros %} {% block content %}
-
+<style>
+  hr {
+    border: none;
+    height: 1px;
+    color: #333;
+    background-color: #333;
+  }
+</style>
 <div class="col-md-4 col-md-offset-4">
   <div align="center">
-    <h1>BarBeerDrinkerPlus</h1>
+    <h1>BarBeerDrinkerPlus+</h1>
   </div>
 
   <div align="center">
 
     <hr>
-    <h3>General queries</h3>
+    <h3>General Queries</h3>
     <hr>
-
+    <br>
     <p>Select a state to find all of the bars and drinkers that are in that state</p>
     <form action="/index" method="POST" name="stateSelection">
       {{ form1.hidden_tag() }} {{ form1.state.label }} {{ form1.state }}
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
+    <br>
     <hr>
     <h3>Queries for Drinkers</h3>
     <hr>
-
+    <br>
     <p>Select a drinker and state to find all of the beers the drinker likes and the all of the bars that serve them</p>
     <form action="/index" method="POST" name="userLikes">
       {{ form5.hidden_tag() }} {{ form5.drinker1.label }} {{ form5.drinker1 }} {{ form5.state1.label }} {{ form5.state1 }}
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
-    <hr>
-
+    <br>
     <p>Select a drinker and a social media to find a list of his friends on that social media and what bars they frequent</p>
     <form action="/index" method="POST" name="mediaSelection">
       {{ form2.hidden_tag() }} {{ form2.drinker.label }} {{ form2.drinker }} {{ form2.media.label }} {{ form2.media }}
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
-    <hr>
+    <br>
     <p>Select a state and month to find the avg age and gender of bartenders and the tips they make</p>
     <form action="/index" method="POST" name="monthlySales">
       {{ form7.hidden_tag() }} {{ form7.state3.label }} {{ form7.state3 }} {{ form7.month3.label }} {{ form7.month3}}
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
+    <br>
     <hr>
     <h3>Queries for Bar Owners</h3>
     <hr>
-
+    <br>
     <p>Select a bar and a month to find its monthly sale for each beer that month</p>
     <form action="/index" method="POST" name="monthlySales">
       {{ form3.hidden_tag() }} {{ form3.bar.label }} {{ form3.bar }} {{ form3.month.label }} {{ form3.month}}
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <hr>
+    <br>
     <p>Select a bar and a month to find its avg sold per day for each beer in that month</p>
     <form action="/index" method="POST" name="monthlySales">
       {{ form4.hidden_tag() }} {{ form4.bar1.label }} {{ form4.bar1 }} {{ form4.month1.label }} {{ form4.month1}}
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <hr>
+    <br>
     <p>Select a state and month to find the avg number of beers sold at each shift at each bar</p>
     <form action="/index" method="POST" name="monthlySales">
       {{ form6.hidden_tag() }} {{ form6.state2.label }} {{ form6.state2 }} {{ form6.month2.label }} {{ form6.month2}}
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <hr>
+    <br>
     <p>Select a state and month to find what type of bar in that state sells the most beer</p>
     <form action="/index" method="POST" name="monthlySales">
       {{ form8.hidden_tag() }} {{ form8.state4.label }} {{ form8.state4 }} {{ form8.month4.label }} {{ form8.month4}}
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
+    <br>
     <hr>
-    <h3>Queries to verify other trends</h3>
+    <h3>Queries to Verify Other Trends</h3>
     <hr>
+    <br>
     <p>Select a state and month to find the drinker that visits bars the most and his salary</p>
     <form action="/index" method="POST" name="monthlySales">
       {{ form9.hidden_tag() }} {{ form9.state5.label }} {{ form9.state5 }} {{ form9.month5.label }} {{ form9.month5 }}
