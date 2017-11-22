@@ -104,5 +104,5 @@ class visits(db.Model):
     qty = db.Column(db.Integer,primary_key=True)
 
 class likes(db.Model):
-    beer_id = db.Column(db.Integer, db.ForeignKey('beers.id'), primary_key=True)
     drinker_id = db.Column(db.Integer, db.ForeignKey('drinkers.id'), primary_key=True)
+    beer_id = db.Column(db.Integer, db.ForeignKey('beers.id'), primary_key=True)
