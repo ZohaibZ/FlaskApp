@@ -13,8 +13,12 @@ class bars(db.Model):
     state = db.Column(db.String(30))
     phone = db.Column(db.String(30))
 
+    def __init__(self, name, state):
+        self.name = name
+        self.state = state
+
     def __repr__(self):
-        return "{}".format(self.name)
+        return "%r" % format(self.name).encode("utf-8")
 
 class drinkers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,8 +30,12 @@ class drinkers(db.Model):
     state = db.Column(db.String(30))
     reviews = db.Column(db.Integer)
 
+    def __init__(self, name, state):
+        self.name = name
+        self.state = state
+
     def __repr__(self):
-        return "{}".format(self.name)
+        return "%r" % format(self.name).encode("utf-8")
 
 class brewery(db.Model):
     id = db.Column(db.Integer, primary_key=True)

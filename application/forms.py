@@ -54,9 +54,16 @@ class bartenderAvg(FlaskForm):
 class typeOfBar(FlaskForm):
     state4 = SelectField(label = 'State', choices = STATE_CHOICES)
     month4 = SelectField(label = 'Month', choices = MONTH_CHOICES)
-    submit = SubmitField("Submit")
+
 
 class whoVisits(FlaskForm):
     state5 = SelectField(label = 'State', choices = STATE_CHOICES)
     month5 = SelectField(label = 'Month', choices = MONTH_CHOICES)
-    submit = SubmitField("Submit")
+
+class insertBar(FlaskForm):
+    barName = TextField(label='Bar Name', description="enter", validators=[validators.required(), validators.Length(min=0, max=128, message=u'Enter 128 characters or less')])
+    barState = SelectField(label = 'State', choices = STATE_CHOICES)
+
+class insertDrinker(FlaskForm):
+    drinkerName = TextField(label='Drinker Name', description="enter", validators=[validators.required(), validators.Length(min=0, max=128, message=u'Enter 128 characters or less')])
+    drinkerState = SelectField(label = 'State', choices = STATE_CHOICES)
