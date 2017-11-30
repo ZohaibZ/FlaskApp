@@ -6,37 +6,80 @@
     color: #333;
     background-color: #333;
   }
+
+  .wrapper {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap:1em;
+    grid-row-gap:1em;
+  }
+
+  .wrapper > div {
+    background:#eee;
+    padding:1em;
+  }
+
+  .wrapper > div:nth-child(1) {
+    background:#ddd;
+  }
+  .wrapper > div:nth-child(4) {
+    background:#ddd;
+  }
+
 </style>
-<div class="col-md-4 col-md-offset-4">
+
+
   <div align="center">
+    <hr></hr>
     <h1>BarBeerDrinkerPlus+</h1>
+    <hr></hr>
   </div>
 
-  <div align="center">
-
+  <div class="wrapper">
+    <div>
     <hr></hr>
-    <h3>General Queries</h3>
+    <h3 align="center">General Queries</h3>
     <hr></hr>
 
     <br>
 
     <p>Select a state to find all of the bars and drinkers that are in that state</p>
+    <p>You can this to verify your inputs to the queries below</p>
     <form action="/index" method="POST" name="stateSelection">
-      {{ form1.hidden_tag() }} {{ form1.state.label }} {{ form1.state }}
+      {{ form1.hidden_tag() }} {{ form1.state.label }} {{ form1.state }}<br>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
     <br>
+    </div>
 
+    <div>
     <hr></hr>
-    <h3>Queries for Drinkers</h3>
+    <h3 align="center">Queries to Verify some Trends</h3>
+    <hr></hr>
+    <p>These are extra queries to verify more trends on top of trends that are already seen under queries for drinkers and bars</p>
+    <br>
+
+    <p>Select a state and month to find the drinker that visits bars the most and his salary</p>
+    <p>(*The trend set here is that the drinkers that earn the least are the ones that visit the bars the most, with some randomness factor*)</p>
+    <form action="/index" method="POST" name="monthlySales">
+      {{ form9.hidden_tag() }} {{ form9.state5.label }} {{ form9.state5 }} <br>{{ form9.month5.label }} {{ form9.month5 }}<br>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <br>
+  </div>
+
+  <div>
+    <hr></hr>
+    <h3 align="center">Queries for Drinkers</h3>
     <hr></hr>
 
     <br>
 
     <p>Select a drinker and state to find all of the beers the drinker likes and the all of the bars that serve them</p>
     <form action="/index" method="POST" name="userLikes">
-      {{ form5.hidden_tag() }} {{ form5.drinker1.label }} {{ form5.drinker1 }} {{ form5.state1.label }} {{ form5.state1 }}
+      {{ form5.hidden_tag() }} {{ form5.drinker1.label }} {{ form5.drinker1 }} <br>{{ form5.state1.label }} {{ form5.state1 }}<br>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
@@ -44,15 +87,16 @@
 
     <p>Select a drinker and a social media to find a list of his friends on that social media and what bars they frequent</p>
     <form action="/index" method="POST" name="mediaSelection">
-      {{ form2.hidden_tag() }} {{ form2.drinker.label }} {{ form2.drinker }} {{ form2.media.label }} {{ form2.media }}
+      {{ form2.hidden_tag() }} {{ form2.drinker.label }} {{ form2.drinker }}<br> {{ form2.media.label }} {{ form2.media }}<br>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
     <br>
 
-    <p>Select a state and month to find the avg age and gender of bartenders and the tips they make</p>
+    <p>Select a state and month to find the avg age and gender of bartenders and the average tips they make on certain shift</p>
+    <p>(*The trend set here is that the bartenders that work the lattar shifts earn more, so avg tip made in shift 3 > shift 2 > shift 1 in general, with some randomness factor*)</p>
     <form action="/index" method="POST" name="monthlySales">
-      {{ form7.hidden_tag() }} {{ form7.state3.label }} {{ form7.state3 }} {{ form7.month3.label }} {{ form7.month3}}
+      {{ form7.hidden_tag() }} {{ form7.state3.label }} {{ form7.state3 }} <br>{{ form7.month3.label }} {{ form7.month3}}<br>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
@@ -60,21 +104,23 @@
 
     <p>Enter a drinkers name and state then press submit to provide us with the least bit of information</p>
     <form method="POST" action="/index" name="insertDrinker">
-      {{ form11.hidden_tag() }} {{ macros.render_field(form11.drinkerName, placeholder='Enter a drinker name to enter into DB', type='drinkerName', label_visible=False) }} {{ form11.drinkerState.label }} {{ form11.drinkerState }}
+      {{ form11.hidden_tag() }} {{ macros.render_field(form11.drinkerName, placeholder='Enter a drinker name to enter into DB', type='drinkerName', label_visible=False) }} <br>{{ form11.drinkerState.label }} {{ form11.drinkerState }}<br>
       <button type="submit" class="btn btn-primary">Submit</button></p>
     </form>
 
     <br>
+</div>
 
+<div>
     <hr></hr>
-    <h3>Queries for Bar Owners</h3>
+    <h3 align="center">Queries for Bar Owners</h3>
     <hr></hr>
 
     <br>
 
     <p>Select a bar and a month to find its monthly sale for each beer that month</p>
     <form action="/index" method="POST" name="monthlySales">
-      {{ form3.hidden_tag() }} {{ form3.bar.label }} {{ form3.bar }} {{ form3.month.label }} {{ form3.month}}
+      {{ form3.hidden_tag() }} {{ form3.bar.label }} {{ form3.bar }}<br> {{ form3.month.label }} {{ form3.month}}<br>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
@@ -82,15 +128,16 @@
 
     <p>Select a bar and a month to find its avg sold per day for each beer in that month</p>
     <form action="/index" method="POST" name="monthlySales">
-      {{ form4.hidden_tag() }} {{ form4.bar1.label }} {{ form4.bar1 }} {{ form4.month1.label }} {{ form4.month1}}
+      {{ form4.hidden_tag() }} {{ form4.bar1.label }} {{ form4.bar1 }} <br>{{ form4.month1.label }} {{ form4.month1}}<br>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
     <br>
 
     <p>Select a state and month to find the avg number of beers sold at each shift at each bar</p>
+    <p>(*The trend set here is that bars sell more in the lattar shifts, so avg beer sold in time 3 > time 2 > time 1 in general, with some randomness factor*)</p>
     <form action="/index" method="POST" name="monthlySales">
-      {{ form6.hidden_tag() }} {{ form6.state2.label }} {{ form6.state2 }} {{ form6.month2.label }} {{ form6.month2}}
+      {{ form6.hidden_tag() }} {{ form6.state2.label }} {{ form6.state2 }}<br>{{ form6.month2.label }} {{ form6.month2}}<br>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
@@ -98,7 +145,7 @@
 
     <p>Select a state and month to find what type of bar in that state sells the most beer</p>
     <form action="/index" method="POST" name="monthlySales">
-      {{ form8.hidden_tag() }} {{ form8.state4.label }} {{ form8.state4 }} {{ form8.month4.label }} {{ form8.month4}}
+      {{ form8.hidden_tag() }} {{ form8.state4.label }} {{ form8.state4 }} <br>{{ form8.month4.label }} {{ form8.month4}}<br>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
@@ -106,26 +153,17 @@
 
     <p>Enter a bar name and state then press submit to provide us with the least bit of information</p>
     <form method="POST" action="/index" name="insertBar">
-      {{ form10.hidden_tag() }} {{ macros.render_field(form10.barName, placeholder='Enter a bar name to enter into DB', type='barName', label_visible=False) }} {{ form10.barState.label }} {{ form10.barState }}
+      {{ form10.hidden_tag() }} {{ macros.render_field(form10.barName, placeholder='Enter a bar name to enter into DB', type='barName', label_visible=False) }}<br> {{ form10.barState.label }} {{ form10.barState }}<br>
       <button type="submit" class="btn btn-primary">Submit</button></p>
     </form>
 
     <br>
-
-    <hr></hr>
-    <h3>Queries to Verify Other Trends</h3>
-    <hr></hr>
-
-    <br>
-
-    <p>Select a state and month to find the drinker that visits bars the most and his salary</p>
-    <form action="/index" method="POST" name="monthlySales">
-      {{ form9.hidden_tag() }} {{ form9.state5.label }} {{ form9.state5 }} {{ form9.month5.label }} {{ form9.month5 }}
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-    <br>
-    <h4>NOTE: Some results you will see time/shift they range from 1 to 3 (1 = 8am to 2pm, 2 = 2pm to 8pm, 3 = 8pm to 2am)</h4>
   </div>
+
 </div>
+
+<div align="center">
+    <h4>** NOTE: Some results you will see time/shift they range from 1 to 3 (1 = 8am to 2pm, 2 = 2pm to 8pm, 3 = 8pm to 2am)</h4>
+  </div>
 
 {% endblock %}
