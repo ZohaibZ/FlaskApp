@@ -10,20 +10,37 @@
   .wrapper {
     display:grid;
     grid-template-columns: 1fr 1fr;
-    grid-column-gap:1em;
-    grid-row-gap:1em;
+    grid-gap:1em;
   }
-
-  .wrapper > div {
-    background:#eee;
+  .one {
+    background-color:#ddd;
     padding:1em;
+    grid-column: 1;
+    grid-row: 1;
   }
-
-  .wrapper > div:nth-child(1) {
-    background:#ddd;
+  .two {
+    background-color:#eee;
+    padding:1em;
+    grid-column: 2 ;
+    grid-row: 1 ;
   }
-  .wrapper > div:nth-child(4) {
-    background:#ddd;
+  .three {
+    background-color:#eee;
+    padding:1em;
+    grid-column: 1 ;
+    grid-row: 2 ;
+  }
+  .four {
+    background-color:#ddd;
+    padding:1em;
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .five {
+    background-color:#ccc;
+    padding:1em;
+    grid-column: 1/3;
+    grid-row: 3;
   }
 
 </style>
@@ -36,7 +53,7 @@
   </div>
 
   <div class="wrapper">
-    <div>
+    <div class="one">
     <hr></hr>
     <h3 align="center">General Queries</h3>
     <hr></hr>
@@ -53,7 +70,7 @@
     <br>
     </div>
 
-    <div>
+    <div class="two">
     <hr></hr>
     <h3 align="center">Queries to Verify some Trends</h3>
     <hr></hr>
@@ -70,7 +87,7 @@
     <br>
   </div>
 
-  <div>
+  <div class="three">
     <hr></hr>
     <h3 align="center">Queries for Drinkers</h3>
     <hr></hr>
@@ -103,6 +120,7 @@
     <br>
 
     <p>Enter a drinkers name and state then press submit to provide us with the least bit of information</p>
+        <p>(*This is not much of a contraint query, if i had user input the id of a drinker then that would be a contraint query since bar id is the primary key and cannot have duplicates, here inserting any name will auto increment an id for the drinker)</p>
     <form method="POST" action="/index" name="insertDrinker">
       {{ form11.hidden_tag() }} {{ macros.render_field(form11.drinkerName, placeholder='Enter a drinker name to enter into DB', type='drinkerName', label_visible=False) }} <br>{{ form11.drinkerState.label }} {{ form11.drinkerState }}<br>
       <button type="submit" class="btn btn-primary">Submit</button></p>
@@ -111,7 +129,7 @@
     <br>
 </div>
 
-<div>
+<div class ="four">
     <hr></hr>
     <h3 align="center">Queries for Bar Owners</h3>
     <hr></hr>
@@ -152,6 +170,7 @@
     <br>
 
     <p>Enter a bar name and state then press submit to provide us with the least bit of information</p>
+    <p>(*This is not much of a contraint query, if i had user input the id of a bar then that would be a contraint query since bar id is the primary key and cannot be a duplicate, here inserting any name will auto increment an id for the bar)</p>
     <form method="POST" action="/index" name="insertBar">
       {{ form10.hidden_tag() }} {{ macros.render_field(form10.barName, placeholder='Enter a bar name to enter into DB', type='barName', label_visible=False) }}<br> {{ form10.barState.label }} {{ form10.barState }}<br>
       <button type="submit" class="btn btn-primary">Submit</button></p>
@@ -159,6 +178,26 @@
 
     <br>
   </div>
+
+  <div class="five">
+    <div align="center">
+    <hr></hr>
+    <h3>Queries for Testing Constraint</h3>
+    <hr></hr>
+
+    <br>
+
+    <p>Select a bar and and indicate a beer that they are selling now</p>
+    <p>For simplicity purposes this is only taking in bar and beer, however table is capable of taking in the sale (month, day, time, price, qty)</p>
+    <p>(*The constrint here is that the sells table will not take two entries of the same beer at a bar because they are primary keys*)</p>
+    <form action="/index" method="POST" name="insertBeer">
+      {{ form12.hidden_tag() }} {{ form12.bar2.label }} {{ form12.bar2 }} <br>{{ form12.beer2.label }} {{ form12.beer2}}<br>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <br>
+  </div>
+</div>
 
 </div>
 

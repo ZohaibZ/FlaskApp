@@ -52,7 +52,9 @@ class beers(db.Model):
     brewery_id = db.Column(db.Integer, db.ForeignKey('brewery.id'))
     name = db.Column(db.String(30))
 
-
+    def __repr__(self):
+        return "%r" % format(self.name).encode("utf-8")
+    
 class bartenders(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128))
@@ -83,6 +85,10 @@ class sells(db.Model):
     time = db.Column(db.Integer, primary_key=True)
     price = db.Column(db.Float)
     qty = db.Column(db.Integer)
+
+    def __init__(self, bar_id, beer_id):
+        self.bar_id = bar_id
+        self.beer_id = beer_id
 
 class socialmedia(db.Model):
     id = db.Column(db.Integer, primary_key=True)

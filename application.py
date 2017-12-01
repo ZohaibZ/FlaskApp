@@ -23,6 +23,7 @@ def index():
     who_visits = whoVisits(request.form)
     insert_bar = insertBar(request.form)
     insert_drinker = insertDrinker(request.form)
+    insert_beer = insertBeer(request.form)
 
     if request.method == 'POST' and state_select.validate_on_submit():
         print "state here"
@@ -107,9 +108,9 @@ def index():
         try:
             db.session.add(bar_entered)
             db.session.commit()
-            db.session.close()
         except:
             db.session.rollback()
+            return render_template('error.html', database= "drinkers", name=insert_drinker.drinkerName.data, state=insert_drinker.drinkerState.data)
         print "thanks 1"
         return render_template('thanks.html', database= "bars", name=insert_bar.barName.data, state=insert_bar.barState.data)
 
@@ -118,13 +119,24 @@ def index():
         try:
             db.session.add(drinker_entered)
             db.session.commit()
-            db.session.close()
         except:
             db.session.rollback()
+            return render_template('error.html', database= "drinkers", name=insert_drinker.drinkerName.data, state=insert_drinker.drinkerState.data)
         print "thanks 2"
         return render_template('thanks.html', database= "drinkers", name=insert_drinker.drinkerName.data, state=insert_drinker.drinkerState.data)
 
-    return render_template('index.html', form1 = state_select, form2 = media_select, form3 = monthly_sale, form4 = daily_avgs, form5= user_likes, form6=time_ofday, form7=bartender_avg, form8=type_ofbar, form9 = who_visits, form10=insert_bar, form11=insert_drinker)
+    if request.method == 'POST' and insert_beer.validate():
+        beer_entered = sells(bar_id=insert_beer.bar2.data.id, beer_id=insert_beer.beer2.data.id)
+        try:
+            db.session.add(beer_entered)
+            db.session.commit()
+        except:
+            db.session.rollback()
+            return render_template('error.html', database= "sells", name=insert_beer.bar2.data, state=insert_beer.beer2.data)
+        print "thanks 3"
+        return render_template('thanks.html', database= "sells", name=insert_beer.bar2.data, state=insert_beer.beer2.data)
+
+    return render_template('index.html', form1 = state_select, form2 = media_select, form3 = monthly_sale, form4 = daily_avgs, form5= user_likes, form6=time_ofday, form7=bartender_avg, form8=type_ofbar, form9 = who_visits, form10=insert_bar, form11=insert_drinker, form12=insert_beer)
 
 if __name__ == '__main__':
     application.run(debug = True)

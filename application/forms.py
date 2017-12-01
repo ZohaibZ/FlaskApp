@@ -24,6 +24,9 @@ def drinker_query():
 def bar_query():
     return bars.query.order_by(bars.name)
 
+def beer_query():
+    return beers.query.order_by(beers.name)
+
 class stateSelection(FlaskForm):
     state = SelectField(label = 'State', choices = STATE_CHOICES)
 
@@ -55,7 +58,6 @@ class typeOfBar(FlaskForm):
     state4 = SelectField(label = 'State', choices = STATE_CHOICES)
     month4 = SelectField(label = 'Month', choices = MONTH_CHOICES)
 
-
 class whoVisits(FlaskForm):
     state5 = SelectField(label = 'State', choices = STATE_CHOICES)
     month5 = SelectField(label = 'Month', choices = MONTH_CHOICES)
@@ -67,3 +69,7 @@ class insertBar(FlaskForm):
 class insertDrinker(FlaskForm):
     drinkerName = TextField(label='Drinker Name', description="enter", validators=[validators.required(), validators.Length(min=0, max=128, message=u'Enter 128 characters or less')])
     drinkerState = SelectField(label = 'State', choices = STATE_CHOICES)
+
+class insertBeer(FlaskForm):
+    bar2 = QuerySelectField(label = 'Bar', query_factory=bar_query, allow_blank=False)
+    beer2 = QuerySelectField(label = 'Beer', query_factory=beer_query, allow_blank=False)
